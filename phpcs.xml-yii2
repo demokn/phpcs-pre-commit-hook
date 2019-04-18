@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ruleset name="PHPCS Coding Standards For Yii2 Application">
+    <description>Yii2 Application Coding Standards</description>
+
+    <arg name="extensions" value="php" />
+    <arg name="colors" />
+    <!-- Show progress of the run -->
+    <arg value="p" />
+
+    <rule ref="PSR2">
+        <!-- Ignore line length sniffer -->
+        <exclude name="Generic.Files.LineLength" />
+    </rule>
+
+    <!-- Ignore for migrations -->
+    <!-- Ignore missing namespace for migrations -->
+    <rule ref="PSR1.Classes.ClassDeclaration.MissingNamespace">
+        <exclude-pattern>m\d{6}_\d{6}_.+\.php$</exclude-pattern>
+    </rule>
+    <!-- Ignore camel caps format for class name of migrations -->
+    <rule ref="Squiz.Classes.ValidClassName.NotCamelCaps">
+        <exclude-pattern>m\d{6}_\d{6}_.+\.php$</exclude-pattern>
+    </rule>
+
+    <!-- Ignore for tests -->
+    <!-- Ignore method name prefixed with underscore to indicate visibility -->
+    <rule ref="PSR2.Methods.MethodDeclaration.Underscore">
+        <exclude-pattern>tests?/*(Cest|Test).php$</exclude-pattern>
+    </rule>
+    <!-- Ignore declare new symbols and execute logic with side effects same file -->
+    <rule ref="PSR1.Files.SideEffects.FoundWithSymbols">
+        <exclude-pattern>tests?*/_bootstrap.php$</exclude-pattern>
+        <exclude-pattern>web/(index|index-test).php$</exclude-pattern>
+    </rule>
+
+    <exclude-pattern>/vendor/</exclude-pattern>
+</ruleset>
